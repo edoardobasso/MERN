@@ -2,9 +2,9 @@ const express = require("express");
 const activitiesModel = require("../model/activitiesModel");
 const router = express.Router();
 
-router.get("/all", (req, res) => {
+router.get("/:id", (req, res) => {
     activitiesModel
-        .find({})
+        .find({ itn_id: req.params.id })
         .then(files => {
             res.send(files);
         })
@@ -23,7 +23,6 @@ router.post("/:id/add", (req, res) => {
         })
         .catch(err => {
             res.status(500).send("Server error");
-        });
+        })
 });
 module.exports = router;
-
